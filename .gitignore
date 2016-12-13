@@ -1,5 +1,12 @@
+.idea/
 .pioenvs
 .piolibdeps
 .clang_complete
 .gcc-flags.json
 CMakeListsPrivate.txt
+cmake-build-debug/CMakeFiles/CMakeTmp/
+cmake-build-debug/CMakeFiles/gallInnaf.dir/src/
+cmake-build-debug/CMakeFiles/PLATFORMIO_BUILD.dir/depend.internal
+cmake-build-debug/CMakeFiles/PLATFORMIO_BUILD.dir/depend.make
+cmake-build-debug/CMakeFiles/PLATFORMIO_UPLOAD.dir/depend.internal
+cmake-build-debug/CMakeFiles/PLATFORMIO_UPLOAD.dir/depend.make
