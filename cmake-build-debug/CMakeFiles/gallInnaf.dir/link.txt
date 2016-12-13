@@ -1,1 +1,0 @@
-/home/gallochri/.platformio/packages/toolchain-xtensa/bin/xtensa-lx106-elf-g++   -g   CMakeFiles/gallInnaf.dir/src/main.cpp.o  -o gallInnaf -rdynamic 
