@@ -11,6 +11,7 @@
 #define DC_JUMPER 0
 
 MicroOLED oled(PIN_RESET, DC_JUMPER);
+WidgetLED led1(V0);
 
 void printTitle(String title, int font) {
     int middleX = oled.getLCDWidth() / 2;
@@ -31,13 +32,11 @@ void setup() {
     oled.begin();
     oled.clear(ALL);
     oled.display();
-
     Blynk.begin(auth,ssid,pass,domain,port);
 }
 
 void loop() {
     Blynk.run();
-    WidgetLED led1(V0);
     int sensorValue = analogRead(A0);
     Serial.print(sensorValue);
     int sensorON = digitalRead(D5);
@@ -45,7 +44,9 @@ void loop() {
     Serial.println(sensorON);
     if (sensorON == 0){
         led1.on();
+    } else {
+        led1.off();
     }
     printTitle("Value:" + String(sensorValue), 0);
-    delay(1000*60); //Waintig 1 minute
+    delay(100);
 }
