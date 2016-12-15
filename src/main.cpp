@@ -1,7 +1,11 @@
 #include <Arduino.h>
+#include <ESP8266WiFi.h>
 #include <Wire.h>
 #include <SPI.h>
 #include <SFE_MicroOLED.h>
+#include <BlynkSimpleEsp8266.h>
+
+#include "user_config.h"
 
 #define PIN_RESET 255
 #define DC_JUMPER 0
@@ -11,12 +15,10 @@ MicroOLED oled(PIN_RESET, DC_JUMPER);
 void printTitle(String title, int font) {
     int middleX = oled.getLCDWidth() / 2;
     int middleY = oled.getLCDHeight() / 2;
-
     oled.clear(PAGE);
     oled.setFontType(font);
     // Try to set the cursor in the middle of the screen
-    oled.setCursor(0,
-                   middleY - (oled.getFontWidth() / 2));
+    oled.setCursor(0,middleY - (oled.getFontWidth() / 2));
     // Print the title:
     oled.print(title);
     oled.display();
@@ -24,20 +26,26 @@ void printTitle(String title, int font) {
     oled.clear(PAGE);
 }
 
-/*Sketch per rilevare l'umidita' del terreno (valore analogico)*/
 void setup() {
     Serial.begin(115200);
     oled.begin();
     oled.clear(ALL);
     oled.display();
+
+    Blynk.begin(auth,ssid,pass,domain,port);
 }
 
 void loop() {
-    int sensorValue = analogRead(A0); //Legge il valore analogico
-    Serial.print(sensorValue); //Stampa a schermo il valore
+    Blynk.run();
+    WidgetLED led1(V0);
+    int sensorValue = analogRead(A0);
+    Serial.print(sensorValue);
     int sensorON = digitalRead(D5);
     Serial.print(" Digital output:");
     Serial.println(sensorON);
+    if (sensorON == 0){
+        led1.on();
+    }
     printTitle("Value:" + String(sensorValue), 0);
-    delay(2000); //Attende due secondi
+    delay(1000*60); //Waintig 1 minute
 }

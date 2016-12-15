@@ -1,0 +1,12 @@
+#ifndef USER_CONFIG_H
+#define USER_CONFIG_H
+
+//Wifi config
+char ssid[]     = "YourNetworkName";
+char pass[]     = "YourPassword";
+//Blynk config
+char auth[]     = "YourAuthToken";
+char domain[]   = "YourBlynkServer";
+uint16_t port   = YourServerPort;  //default set to 8442
+
+#endif //USER_CONFIG_H
