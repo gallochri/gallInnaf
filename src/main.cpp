@@ -3,8 +3,7 @@
 #include <Wire.h>
 #include <SPI.h>
 #include <SFE_MicroOLED.h>
-#include "../lib/ubidots-esp8266/UbidotsESP8266.h"
-#include <SoftwareSerial.h>
+#include <ThingSpeak.h>
 
 #include "user_config.h"
 
@@ -12,7 +11,8 @@
 #define DC_JUMPER 0
 
 MicroOLED oled(PIN_RESET, DC_JUMPER);
-Ubidots client(TOKEN);
+int status = WL_IDLE_STATUS;
+WiFiClient client;
 
 void printTitle(String title, int font) {
     int middleX = oled.getLCDWidth() / 2;
@@ -29,7 +29,8 @@ void printTitle(String title, int font) {
 }
 
 void setup() {
-    client.wifiConnection(ssid,pass);
+    WiFi.begin(ssid,pass);
+    ThingSpeak.begin(client);
     Serial.begin(115200);
     oled.begin();
     oled.clear(ALL);
@@ -43,8 +44,7 @@ void loop() {
     Serial.print(" Digital output:");
     Serial.println(sensorON);
     printTitle("Value:" + String(sensorValue), 0);
-    client.add(ID,sensorValue);
-    client.sendAll();
-    delay(100);
+    ThingSpeak.writeField(myChannelNumber, 1, sensorValue, myWriteAPIKey);
+    delay(1000*60);
 }
 

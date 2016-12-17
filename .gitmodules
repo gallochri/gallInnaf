@@ -1,3 +1,0 @@
-[submodule "lib/ubidots-esp8266"]
-	path = lib/ubidots-esp8266
-	url = https://github.com/ubidots/ubidots-esp8266
