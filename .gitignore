@@ -7,3 +7,4 @@ CMakeListsPrivate.txt
 user_config.h
 cmake-build-debug/
 /CMakeLists.txt
+.directory
